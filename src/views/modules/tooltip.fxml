@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<HBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      alignment="CENTER"
+      style="-fx-background-color: black; -fx-background-radius: 20;">
+    <padding>
+        <Insets topRightBottomLeft="10"/>
+    </padding>
+    <children>
+        <ImageView id="imgMessage" fitWidth="30" preserveRatio="true">
+            <image>
+                <Image url="/res/tooltip.png"/>
+            </image>
+        </ImageView>
+        <Label id="lbMessage" style="-fx-text-fill: white;" text="메세지가 왔습니다.">
+            <HBox.margin>
+                <Insets left="5" right="5"/>
+            </HBox.margin>
+        </Label>
+    </children>
+</HBox>

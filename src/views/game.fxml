@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<?import model.Stone?>
+<AnchorPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerGame">
+    <BorderPane fx:id="game" prefHeight="400.0" prefWidth="800.0">
+
+        <!-- Header -->
+        <top>
+            <BorderPane prefHeight="50" prefWidth="800" style="-fx-border-color: black;">
+                <padding>
+                    <Insets topRightBottomLeft="10"/>
+                </padding>
+                <left>
+                    <Button fx:id="btnGameStart" text="게임시작"/>
+                </left>
+                <center>
+                    <Label fx:id="lbDisplay" text="게임대기중"/>
+                </center>
+                <right>
+                    <Button fx:id="btnGameEnd" text="게임종료"/>
+                </right>
+            </BorderPane>
+        </top>
+
+        <!-- DashBoard -->
+        <left>
+            <VBox prefWidth="200" spacing="10" style="-fx-border-color: black;">
+                <padding>
+                    <Insets topRightBottomLeft="20"/>
+                </padding>
+                <children>
+                    <HBox spacing="20">
+                        <children>
+                            <Stone fill="black" stroke="black" strokeWidth="2" radius="10" />
+                            <Label text=" : ">
+                                <font>
+                                    <Font name="System Bold" size="20.0"/>
+                                </font>
+                            </Label>
+                            <Label fx:id="lbBlack" text="0">
+                                <font>
+                                    <Font name="System Bold" size="20.0"/>
+                                </font>
+                            </Label>
+                        </children>
+                    </HBox>
+                    <HBox spacing="20">
+                        <children>
+                            <Stone fill="white" stroke="black" strokeWidth="2" radius="10" />
+                            <Label text=" : ">
+                                <font>
+                                    <Font name="System Bold" size="20.0"/>
+                                </font>
+                            </Label>
+                            <Label fx:id="lbWhite" text="0">
+                                <font>
+                                    <Font name="System Bold" size="20.0"/>
+                                </font>
+                            </Label>
+                        </children>
+                    </HBox>
+                </children>
+            </VBox>
+        </left>
+
+        <!-- Play -->
+        <center>
+            <GridPane fx:id="playGround" prefHeight="400" prefWidth="350" style="-fx-border-color: black;">
+                <padding>
+                    <Insets top="10" bottom="10" left="35" right="35" /> <!-- 330 x 330 -->
+                </padding>
+            </GridPane>
+        </center>
+
+        <!-- Chatting -->
+        <right>
+            <fx:include fx:id="chat" source="modules/chat.fxml"/>
+        </right>
+    </BorderPane>
+</AnchorPane>

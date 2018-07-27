@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      prefHeight="350"
+      prefWidth="200"
+      style="-fx-border-color: black;">
+    <!--fx:controller="controller.ControllerChatrollerChat"-->
+    <children>
+        <TextField prefHeight="325" disable="true" text="도전! Othello에 오신것을 환영합니다.">
+            <VBox.vgrow><Priority fx:constant="ALWAYS" /></VBox.vgrow>
+            <maxWidth><Double fx:constant="MAX_VALUE" /></maxWidth>
+        </TextField>
+        <HBox>
+            <children>
+                <TextField />
+                <Button text="전송" />
+            </children>
+        </HBox>
+    </children>
+</VBox>

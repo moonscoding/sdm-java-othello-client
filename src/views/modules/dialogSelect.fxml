@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            prefHeight="150.0" prefWidth="400.0">
+    <children>
+        <ImageView fitWidth="50" fitHeight="50" layoutX="15" layoutY="15" preserveRatio="true">
+            <image>
+                <Image url="/res/tooltip.png" />
+            </image>
+        </ImageView>
+        <Label id="lbMessage" layoutX="87" layoutY="33" prefHeight="15" prefWidth="290" />
+        <Button id="btnOK" layoutX="280" layoutY="104" text="확인" />
+        <Button id="btnCancel" layoutX="336" layoutY="104" text="취소" />
+    </children>
+</AnchorPane>

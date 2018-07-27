@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.121"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerIndex">
+    <BorderPane>
+        <left>
+            <AnchorPane prefWidth="150" />
+        </left>
+        <center>
+            <VBox alignment="CENTER" prefHeight="400" prefWidth="500" spacing="10">
+                <Label text="도전! Othello">
+                    <font>
+                        <Font name="System Bold" size="72.0"/>
+                    </font>
+                </Label>
+                <Label text="플레이어의 이름를 입력해주세요.">
+                    <font>
+                        <Font name="System Font" size="14.0"/>
+                    </font>
+                </Label>
+                <TextField fx:id="tfId" alignment="CENTER" prefWidth="100" text="player01">
+                    <opaqueInsets>
+                        <Insets/>
+                    </opaqueInsets>
+                </TextField>
+                <Button fx:id="btnStart" text="시작하기"/>
+            </VBox>
+        </center>
+        <right>
+            <AnchorPane prefWidth="150" />
+        </right>
+    </BorderPane>
+</AnchorPane>
