@@ -1,7 +1,6 @@
 package model;
 
-import model.User;
-import util.MySocket;
+import structure.MySocket;
 
 public class Share {
     public User user;

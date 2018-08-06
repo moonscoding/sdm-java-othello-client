@@ -1,4 +1,4 @@
-package implement;
+package structure;
 
 import common.Define;
 import javafx.collections.FXCollections;
@@ -12,17 +12,7 @@ import model.Room;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * [ Class :: TableAdapter ]
- *
- * @경로 :: /src/implement/TableAdapter.java
- * @목적 :: TableView Adapter
- * @진행 :: 진행
- * @주의 :: 없음
- * @일자 :: 2018.07.27
- * @작성 :: SDM
- * @참조 :: 없음
- * */
+/* TableAdapter */
 public abstract class TableAdapter<T> {
 
     List<T> tableList = new ArrayList<>();

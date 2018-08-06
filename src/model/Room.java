@@ -1,14 +1,10 @@
 package model;
 
 import common.Define;
-import implement.Callback;
+import functional.Callback;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.fxml.Initializable;
 import util.PopupManager;
 import util.SceneManager;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class Room {
 

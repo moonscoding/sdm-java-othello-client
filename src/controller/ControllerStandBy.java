@@ -1,25 +1,18 @@
 package controller;
 
 
-import adapter.TableRoom;
+import util.TableRoom;
 import common.Define;
-import common.Str;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 import javafx.scene.control.Button;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import model.Room;
 import model.Share;
-import util.MySocket;
+import structure.MySocket;
 import util.PopupManager;
 import util.SceneManager;
 
@@ -38,7 +31,6 @@ public class ControllerStandBy implements Initializable {
     private TableView<Room> tableRoom;
 
     SceneManager sceneManager;
-    MySocket socket;
     Share share;
     List<Room> rooms = new ArrayList<>();
 
@@ -47,26 +39,12 @@ public class ControllerStandBy implements Initializable {
         sceneManager = SceneManager.getInstance();
         share = (Share) sceneManager.getStage().getUserData();
 
-        initSocket();
         initTableView();
+        requestTableView();
 
         btnRoomCreate.setOnAction(event -> handlerBtnRoomCreate(event));
         btnGoBack.setOnAction(event -> handlerBtnGoBack(event));
     }
-
-
-    /* socket 초기화 */
-    public void initSocket() {
-        try {
-            socket = new MySocket();
-        } catch (RuntimeException err) {
-
-            // == 서버통신두절 ( Popup처리 ) ==
-            System.out.println(err.getMessage());
-        }
-        share.socket = socket;
-    }
-
 
     /* tableview 초기화 */
     public void initTableView() {
@@ -87,6 +65,10 @@ public class ControllerStandBy implements Initializable {
         });
     }
 
+    /* table 정보요청 */
+    private void requestTableView() {
+        share.socket.send(Define.URL_REQ_UPDATE);
+    }
 
     /* 방만들기 */
     public void handlerBtnRoomCreate(ActionEvent ae) {

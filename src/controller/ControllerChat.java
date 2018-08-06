@@ -1,6 +1,6 @@
 package controller;
 
-import util.MySocket;
+import structure.MySocket;
 
 public class ControllerChat {
 

@@ -1,4 +1,4 @@
-package adapter;
+package util;
 
 
 import common.Num;
@@ -8,12 +8,12 @@ import model.Stone;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OthelloBoard {
+public class GridBoard {
 
     GridPane playGround;
     Stone[][] board;
 
-    public OthelloBoard(GridPane playGround) {
+    public GridBoard(GridPane playGround) {
         this.playGround = playGround;
         init();
     }

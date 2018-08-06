@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import adapter.OthelloBoard;
+import util.GridBoard;
 import model.Share;
 import model.User;
 import util.SceneManager;
@@ -27,7 +27,7 @@ public class ControllerGame implements Initializable {
 
     SceneManager sceneManager;
     Share share;
-    OthelloBoard board;
+    GridBoard board;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -62,7 +62,7 @@ public class ControllerGame implements Initializable {
         lbWhite.setText("2");
 
         // == 오셀로판 초기화 ==
-        board = new OthelloBoard(playGround);
+        board = new GridBoard(playGround);
     }
 
     /* 게임시작 & 게임준비 */

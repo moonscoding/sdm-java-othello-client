@@ -1,4 +1,4 @@
-package implement;
+package structure;
 
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;

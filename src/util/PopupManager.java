@@ -1,6 +1,6 @@
 package util;
 
-import implement.Callback;
+import functional.Callback;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

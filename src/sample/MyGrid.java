@@ -4,7 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import adapter.OthelloBoard;
+import util.GridBoard;
 public class MyGrid extends Application {
 
     public static void main(String[] args) {
@@ -16,7 +16,7 @@ public class MyGrid extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         GridPane grid = new GridPane();
-        OthelloBoard board = new OthelloBoard(grid);
+        GridBoard board = new GridBoard(grid);
 
         Scene scene = new Scene(grid, 500, 500);
         primaryStage.setScene(scene);
