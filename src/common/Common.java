@@ -1,9 +1,9 @@
-package util;
+package common;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class Request {
+public class Common {
 
     /* cutHeader - packet method 추출 */
     public static String cutHeader(String request) {
@@ -18,9 +18,6 @@ public class Request {
     /* cutBody */
     public static List<String> cutBody(String request, int[] cutPoint) {
         try {
-            System.out.println("[서버] 전송데이터 : " + request);
-            System.out.println();
-            System.out.println();
             List<String> body = new LinkedList<>();
             int pointer = 0;
             for (int i = 0; i < cutPoint.length; i++) {
@@ -33,6 +30,15 @@ public class Request {
             e.printStackTrace();
             return null;
         }
+    }
+
+    /* fullBlank */
+    public static String fullBlank(String string, int size) {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < size - string.length(); i++) {
+            sb.append(" ");
+        }
+        return sb.append(string).toString();
     }
 
 }

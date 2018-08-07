@@ -1,6 +1,7 @@
 package controller;
 
 
+import common.Common;
 import util.TableRoom;
 import common.Define;
 import javafx.event.ActionEvent;
@@ -12,14 +13,15 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import model.Room;
 import model.Share;
-import structure.MySocket;
 import util.PopupManager;
 import util.SceneManager;
+import util.ViewAdapter;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
 public class ControllerStandBy implements Initializable {
 
@@ -51,8 +53,8 @@ public class ControllerStandBy implements Initializable {
         TableRoom tableAdapter = new TableRoom(tableRoom);
         tableAdapter.init(Define.STANDBY_TABLE_COLUMNS);
 
-        tableAdapter.add(new Room("id1", "title", "player01", "5", true));
-        tableAdapter.add(new Room("id1", "title", "player01", "5", false));
+        // == view adapter (connect socket) ==
+        ViewAdapter.getInstance().setTable(tableAdapter);
 
         tableRoom.setRowFactory( tv -> {
             TableRow<Room> row = new TableRow<>();
@@ -72,11 +74,32 @@ public class ControllerStandBy implements Initializable {
 
     /* 방만들기 */
     public void handlerBtnRoomCreate(ActionEvent ae) {
-        /**
-         * # 팝업생성
-         * # 방으로이동
-         * */
-        PopupManager.getInstance().showDialogCreateRoom();
+        Consumer<String> consummer = (title) -> {
+            if(title.length() > 10) {
+                PopupManager.getInstance().showTooptip("방이름은 최대 10글자까지 사용할 수 있습니다.");
+                return;
+            } else if (title.length() == 0) {
+                PopupManager.getInstance().showTooptip("방이름을 입력해주세요.");
+                return;
+            }
+
+            // == 서버연동 ==
+            share.socket.send(Define.URL_REQ_CREATE + Common.fullBlank(title, Define.SIZE_ROOM_TITLE));
+
+            // == 유저상태 ==
+            SceneManager sm = SceneManager.getInstance();
+            Share share = (Share) sm.getStage().getUserData();
+            share.user.setTeam(Define.GUARDIAN);
+
+            // == 화면전환 ==
+            SceneManager.getInstance().moveScene("views/game.fxml");
+        };
+        PopupManager.getInstance().showDialogInput(
+                "새로운 연승에 도전하세요!",
+                "생성할 방의 이름을 적어주세요.",
+                "welcome!",
+                consummer
+        );
     }
 
     /* 이름변경 */

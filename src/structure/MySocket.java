@@ -75,7 +75,7 @@ public abstract class MySocket {
             try {
 
                 // == read ==
-                ByteBuffer byteBuffer = ByteBuffer.allocate(bufferSize); // 1024
+                ByteBuffer byteBuffer = ByteBuffer.allocate(bufferSize);
                 int byteCount = socketChannel.read(byteBuffer);
                 if(byteCount == -1) throw new IOException();
 

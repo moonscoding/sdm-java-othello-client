@@ -1,11 +1,10 @@
 package controller;
 
+import common.Common;
 import common.Define;
 import model.Share;
-import structure.MySocket;
 import util.O_Socket;
-import util.Request;
-import util.Response;
+import util.PopupManager;
 import util.SceneManager;
 import model.User;
 import javafx.event.ActionEvent;
@@ -62,6 +61,11 @@ public class ControllerIndex implements Initializable {
 
         // == User ==
         String userName = tfId.getText();
+        if(userName.length() > 10) {
+            PopupManager.getInstance().showTooptip("플레이어이름은 최대 10글자까지 사용할 수 있습니다.");
+            return;
+        }
+
         Share share = (Share) SceneManager.getInstance().getStage().getUserData();
         if(share.user == null) {
             User user = new User(userName);
@@ -71,7 +75,7 @@ public class ControllerIndex implements Initializable {
         }
 
         // == Send - User ==
-        share.socket.send(Define.URL_REG_URSE + Response.fullBlank(userName, Define.SIZE_USER_NAME));
+        share.socket.send(Define.URL_REG_URSE + Common.fullBlank(userName, Define.SIZE_USER_NAME));
 
         // == Scene Move ==
         SceneManager.getInstance().moveScene("views/standby.fxml");

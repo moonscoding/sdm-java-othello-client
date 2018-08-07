@@ -32,9 +32,9 @@
         <center>
             <TableView fx:id="tableRoom" style="-fx-border-color: black;">
                 <columns>
-                    <TableColumn prefWidth="120" text="연승" />
-                    <TableColumn prefWidth="120" text="제목" />
                     <TableColumn prefWidth="120" text="유저" />
+                    <TableColumn prefWidth="120" text="제목" />
+                    <TableColumn prefWidth="120" text="연승" />
                     <TableColumn prefWidth="120" text="상태" />
                     <TableColumn prefWidth="120" text="인원" />
                 </columns>

@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.function.Consumer;
 
 public class PopupManager {
 
@@ -108,26 +109,29 @@ public class PopupManager {
         }
     }
 
-    // TODO - 일반화할수있을까 ?
-    /* 팝업 - 다이얼로그 (방만들기) */
-    public void showDialogCreateRoom() {
+    /* 팝업 - 다이얼로그 (인풋) */
+    public void showDialogInput(String title, String message, String input, Consumer<String> callback) {
         try {
             Stage dialog = new Stage(StageStyle.UTILITY);
             dialog.initModality(Modality.WINDOW_MODAL);
             dialog.initOwner(primaryStage);
-            dialog.setTitle("새로운 연승에 도전하세요!"); // dialog title
+            dialog.setTitle(title);
 
+            // == Parent ==
             Parent parent = FXMLLoader.load(getClass().getResource("../views/modules/dialogCreateRoom.fxml"));
+
+            // == 메세지 ==
+            Label lbMessage = (Label) parent.lookup("#lbMessage");
+            lbMessage.setText(message);
+
+            // == 인풋 ==
+            TextField tfTitle = (TextField) parent.lookup("#tfTitle");
+            tfTitle.setText(input);
 
             // == 생성 ==
             Button btnOK = (Button) parent.lookup("#btnOK");
             btnOK.setOnAction(event -> {
-                TextField tfTitle = (TextField) parent.lookup("#tfTitle");
-
-                // == 서버연동 ==
-
-                // == 페이지이동 ==
-                SceneManager.getInstance().moveScene("views/game.fxml");
+                callback.accept(tfTitle.getText());
                 dialog.close();
             });
 

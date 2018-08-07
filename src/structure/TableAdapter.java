@@ -15,11 +15,12 @@ import java.util.List;
 /* TableAdapter */
 public abstract class TableAdapter<T> {
 
+    /* Field */
     List<T> tableList = new ArrayList<>();
     TableView origin;
     ObservableList list;
 
-    /* 생성자 */
+    /* Constuctor */
     public TableAdapter(TableView origin) {
         this.origin = origin;
     }

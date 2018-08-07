@@ -5,6 +5,7 @@ import util.PopupManager;
 import util.SceneManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import util.ViewAdapter;
 
 public class Main extends Application {
 
@@ -17,8 +18,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         SceneManager sceneManager = new SceneManager(primaryStage);
-        PopupManager popupManager = new PopupManager(primaryStage);
         sceneManager.setTitle(Str.APP_NAME);
+        new PopupManager(primaryStage);
+        new ViewAdapter();
 
         switch (Config.PAGE_ENV) {
             case Define.PAGE_INDEX:

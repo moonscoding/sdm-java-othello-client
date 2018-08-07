@@ -42,6 +42,10 @@
 - TableView Adapter Binding 처리
 - GridPane Adapter Binding 처리
 
+#### 버그
+
+- 유저이름변경 (스레드문제)
+
 ### 추가기능
 
 #### Java

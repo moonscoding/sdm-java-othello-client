@@ -17,8 +17,8 @@
                 <Image url="/res/tooltip.png" />
             </image>
         </ImageView>
-        <Label id="lbMessage" layoutX="87" layoutY="33" prefHeight="15" prefWidth="290" text="생성할 방의 이름을 적어주세요."/>
-        <TextField id="tfTitle" layoutX="87" layoutY="60" text="도전! Othello" />
+        <Label id="lbMessage" layoutX="87" layoutY="33" prefHeight="15" prefWidth="290"/>
+        <TextField id="tfTitle" layoutX="87" layoutY="60"/>
         <Button id="btnOK" layoutX="280" layoutY="104" text="확인" />
         <Button id="btnCancel" layoutX="336" layoutY="104" text="취소" />
     </children>

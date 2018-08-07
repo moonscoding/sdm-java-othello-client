@@ -1,5 +1,7 @@
 package controller;
 
+import common.Define;
+import functional.Callback;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,7 +12,9 @@ import javafx.scene.layout.GridPane;
 import util.GridBoard;
 import model.Share;
 import model.User;
+import util.PopupManager;
 import util.SceneManager;
+import util.ViewAdapter;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,7 +23,7 @@ public class ControllerGame implements Initializable {
 
     @FXML BorderPane game;
     @FXML Label lbDisplay;
-    @FXML Button btnGameStart;
+    public @FXML Button btnGameStart;
     @FXML Button btnGameEnd;
     @FXML Label lbBlack;
     @FXML Label lbWhite;
@@ -29,32 +33,32 @@ public class ControllerGame implements Initializable {
     Share share;
     GridBoard board;
 
+    /* initialize */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        // == SceneManager ==
         sceneManager = SceneManager.getInstance();
         share = (Share) sceneManager.getStage().getUserData();
 
-        /**
-         * #초기화 (컨트롤 + 그리드)
-         * #준비상태전달vs시작상태전달
-         * #게임플레이
-         * #게임완전종료vs중단무단종료
-         * */
-
+        // == View Adapter 연동 ==
+        ViewAdapter.getInstance().setControllerGame(this);
         init(share.user);
+
+        // == 이벤트 연동 ==
         btnGameStart.setOnAction(event -> handlerBtnGameStart(event));
         btnGameEnd.setOnAction(event -> handlerBtnGameEnd(event));
     }
 
     /* 초기화 */
-    private void init(User user) {
+    public void init(User user) {
         // == 버튼 초기화 ==
         if(user.isTeam()) {
-            // 준비가 되야 게임을 시작할 수있음
             btnGameStart.setText("게임시작");
             btnGameStart.setDisable(true);
         } else {
             btnGameStart.setText("게임준비");
+            btnGameStart.setDisable(false);
         }
 
         // == 텍스트 초기화 ==
@@ -65,14 +69,39 @@ public class ControllerGame implements Initializable {
         board = new GridBoard(playGround);
     }
 
+    /* 결과 */
+    public void result(boolean victory) {
+        if(share.user.isPlay()) {
+            if(victory) {
+                PopupManager.getInstance().showTooptip("승리!");
+            } else {
+                PopupManager.getInstance().showTooptip("패배!");
+                // TODO getout!
+            }
+            share.user.setPlay(false);
+        } else {
+            PopupManager.getInstance().showTooptip("상대가 나갔습니다.");
+        }
+        init(share.user);
+    }
+
     /* 게임시작 & 게임준비 */
     private void handlerBtnGameStart(ActionEvent ae) {
+        btnGameStart.setDisable(true);
+        share.socket.send(Define.URL_REQ_READY);
 
+        if(share.user.isTeam() == Define.CHALLENGER)
+            PopupManager.getInstance().showTooptip("준비완료");
     }
 
     /* 게임종료 */
     private void handlerBtnGameEnd(ActionEvent ae) {
-        // 팝업으로 재확인
-        SceneManager.getInstance().moveScene("views/standby.fxml");
+        // TODO 팝업재확인
+        Callback cb = ()->{
+            if(share.user.isPlay()) share.user.setPlay(false);
+            share.socket.send(Define.URL_REQ_LEAVE);
+            SceneManager.getInstance().moveScene("views/standby.fxml");
+        };
+        PopupManager.getInstance().showDialogCallback("주의", "정말 현재방을 나가시겠습니까?", cb);
     }
 }

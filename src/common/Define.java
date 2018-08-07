@@ -11,15 +11,21 @@ public class Define {
             getInputArguments().
             toString().
             indexOf("-agentlib:jdwp") > 0;
-    public static String HOST = "localhost";
-    public static short PORT_DEBUG = 2000;
-    public static short PORT_PROP = 3000;
-    public static int BUFFER_SIZE = (int) Math.pow(2, 10); // 1024
-    public static String[] STANDBY_TABLE_COLUMNS = new String[] { "wins", "title", "user", "status", "count"};
+    public static final String HOST = "localhost";
+    public static final short PORT_DEBUG = 2000;
+    public static final short PORT_PROP = 3000;
+    public static final int BUFFER_SIZE = (int) 1 << 13; // 8192 ( byte )
+    public static final String[] STANDBY_TABLE_COLUMNS = new String[] { "wins", "title", "user", "status", "count"};
+    public static final boolean ROOM_STATUS_A = false; // 대기
+    public static final boolean ROOM_STATUS_B = true;  // 진행
+    public static final String ROOM_STRING_A = "대기";
+    public static final String ROOM_STRING_B = "진행";
+    public static final boolean GUARDIAN = true;
+    public static final boolean CHALLENGER = false;
 
     // @URL
     public static final String URL_REG_URSE = "a";
-    public static final String URL_REG_CREATE = "b";
+    public static final String URL_REQ_CREATE = "b";
     public static final String URL_REQ_ENTRY = "c";
     public static final String URL_RES_ENTRY = "d";
     public static final String URL_RES_ENTRY_ACCEPT = "e";
@@ -29,7 +35,7 @@ public class Define {
     public static final String URL_RES_READY_ACCEPT = "i";
     public static final String URL_RES_READY_REJECT = "j";
     public static final String URL_RES_START = "k";
-    public static final String URL_REG_LEAVE = "l";
+    public static final String URL_REQ_LEAVE = "l";
     public static final String URL_RES_LEAVE_GUARDIAN = "m";
     public static final String URL_RES_LEAVE_CHALLENGER = "n";
     public static final String URL_REG_TURN = "o"; // == URL_RES_TURN
@@ -49,19 +55,13 @@ public class Define {
     public static final int SIZE_ROOM_WINS = 2; // 2글자 ( 2byte * 2 ) => int
     public static final int SIZE_ROOM_STATUS = 1; // 1글자 ( 2byte * 1 )
     public static final int SIZE_XY = 1; // 1글자 ( 2byte * 1 ) => 앞에 1byte X // 뒤에 1byte Y
-    public static final int SIZE_ROOMS =
-            (
-                    SIZE_ROOM_ID +
-                            SIZE_ROOM_TITLE +
-                            SIZE_ROOM_WINS +
-                            SIZE_USER_NAME +
-                            SIZE_ROOM_STATUS
-            ) * 50;
+    public static final int SIZE_ROOM = SIZE_ROOM_ID + SIZE_ROOM_TITLE + SIZE_ROOM_WINS + SIZE_USER_NAME + SIZE_ROOM_STATUS;
+    public static final int SIZE_ROOMS = SIZE_ROOM * 50;
 
     // @PROTOCOL
     public static final int[] URL_REG_URSE_PROTOCOL
             = new int[] {SIZE_METHOD, SIZE_USER_NAME}; // |header(2)|username(20)|
-    public static final int[] URL_REG_CREATE_PROTOCOL
+    public static final int[] URL_REQ_CREATE_PROTOCOL
             = new int[] {SIZE_METHOD, SIZE_ROOM_TITLE}; // |header(2)|roomtitle(20)|
     public static final int[] URL_REQ_ENTRY_PROTOCOL
             = new int[] {SIZE_METHOD, SIZE_ROOM_ID}; // |header(2)|roomid(72)|
@@ -71,7 +71,7 @@ public class Define {
             = null; // |header|
     public static final int[] URL_REG_START_PROTOCOL
             = null; // |header|
-    public static final int[] URL_REG_LEAVE_PROTOCOL
+    public static final int[] URL_REQ_LEAVE_PROTOCOL
             = null; // |header|
     public static final int[] URL_REG_TURN_PROTOCOL
             = new int[] {SIZE_METHOD, SIZE_XY}; // |header(2)|xy(2)|
@@ -81,12 +81,8 @@ public class Define {
             = new int[] {SIZE_METHOD, SIZE_CHAT}; // |header(2)|chat(200)|
     public static final int[] URL_RES_UPDATE_PROTOCOL
             = new int[] {SIZE_METHOD, SIZE_ROOMS}; // |header(2)|rooms(4300)|
-
-
-    public static boolean ROOM_STATUS_A = false; // 대기
-    public static boolean ROOM_STATUS_B = true;  // 진행
-    public static String ROOM_STRING_A = "대기";
-    public static String ROOM_STRING_B = "진행";
+    public static final int[] URL_RES_SINGLE_ROOM_PROTOCOL
+            = new int[] {SIZE_ROOM_ID, SIZE_ROOM_TITLE, SIZE_ROOM_WINS, SIZE_USER_NAME, SIZE_ROOM_STATUS};
 
     // @Test
     public static final byte PAGE_INDEX = 0;
