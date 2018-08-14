@@ -18,9 +18,11 @@ import util.ViewAdapter;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
 public class ControllerGame implements Initializable {
 
+    /* FXML */
     @FXML BorderPane game;
     @FXML Label lbDisplay;
     public @FXML Button btnGameStart;
@@ -29,9 +31,13 @@ public class ControllerGame implements Initializable {
     @FXML Label lbWhite;
     @FXML GridPane playGround;
 
+    /* Filed */
     SceneManager sceneManager;
     Share share;
-    GridBoard board;
+    public GridBoard board;
+    Consumer<String> consumer = (String position) -> {
+        share.socket.send(Define.URL_REQ_TURN + position);
+    };
 
     /* initialize */
     @Override
@@ -66,7 +72,7 @@ public class ControllerGame implements Initializable {
         lbWhite.setText("2");
 
         // == 오셀로판 초기화 ==
-        board = new GridBoard(playGround);
+        board = new GridBoard(playGround, user.isTeam()/*isWhite*/, consumer);
     }
 
     /* 결과 */

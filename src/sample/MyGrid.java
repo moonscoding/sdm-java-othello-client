@@ -16,7 +16,7 @@ public class MyGrid extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         GridPane grid = new GridPane();
-        GridBoard board = new GridBoard(grid);
+//        GridBoard board = new GridBoard(grid, true);
 
         Scene scene = new Scene(grid, 500, 500);
         primaryStage.setScene(scene);

@@ -65,7 +65,7 @@ public class O_Socket extends MySocket {
 
             // == 턴정보 ==
             case Define.URL_RES_TURN:
-                // TODO
+                SocketListener.listenTurn(response);
                 break;
 
             // == 채팅정보 ==

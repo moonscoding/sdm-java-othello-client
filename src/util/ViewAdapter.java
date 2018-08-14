@@ -1,5 +1,6 @@
 package util;
 
+import common.Define;
 import controller.ControllerGame;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
@@ -17,7 +18,7 @@ public class ViewAdapter {
 
     /* Constructor */
     public ViewAdapter() {
-        if(instance != null) return;
+        if (instance != null) return;
         instance = this;
     }
 
@@ -38,10 +39,10 @@ public class ViewAdapter {
 
     /* updateTable */
     public void updateTable(List<Room> rooms) {
-        if(tableRoom != null) {
+        if (tableRoom != null) {
             tableRoom.clear();
             Iterator<Room> i = rooms.iterator();
-            while(i.hasNext()) {
+            while (i.hasNext()) {
                 tableRoom.add(i.next());
             }
         }
@@ -49,7 +50,7 @@ public class ViewAdapter {
 
     /* toggleBtnReady */
     public void toggleBtnReady() {
-        Platform.runLater(()->{
+        Platform.runLater(() -> {
             // UI 변경코드
             PopupManager.getInstance().showTooptip("모든플레이어 준비완료");
             this.controllerGame.btnGameStart.setDisable(!this.controllerGame.btnGameStart.isDisabled());
@@ -58,8 +59,9 @@ public class ViewAdapter {
 
     /* startGame */
     public void startGame() {
-        Platform.runLater(()->{
+        Platform.runLater(() -> {
             // UI 변경코드
+            SceneManager.getInstance().share.user.setPlay(true);
             PopupManager.getInstance().showTooptip("게임시작!");
             this.controllerGame.btnGameStart.setDisable(true);
             this.controllerGame.btnGameStart.setText("게임중");
@@ -68,9 +70,23 @@ public class ViewAdapter {
 
     /* initGame */
     public void resultGame(boolean victory) {
-        Platform.runLater(()->{
+        Platform.runLater(() -> {
             // UI 변경코드
             this.controllerGame.result(victory);
+        });
+    }
+
+    /* updateGame */
+    public void updateGame(String position) {
+        Platform.runLater(() -> {
+            // == UI 변경 ==
+            this.controllerGame.board.setStoneByChallenger(
+                    Integer.parseInt(position.substring(0,1)),
+                    Integer.parseInt(position.substring(1,2))
+            );
+
+            // == 차례변경 ==
+            this.controllerGame.board.myTurn = true;
         });
     }
 }

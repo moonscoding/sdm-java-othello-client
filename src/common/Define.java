@@ -22,6 +22,7 @@ public class Define {
     public static final String ROOM_STRING_B = "진행";
     public static final boolean GUARDIAN = true;
     public static final boolean CHALLENGER = false;
+    public static final byte BYTE_INTERVAL = 33; // 초반 공백문자열 바이트부분 점프
 
     // @URL
     public static final String URL_REG_URSE = "a";
@@ -38,7 +39,7 @@ public class Define {
     public static final String URL_REQ_LEAVE = "l";
     public static final String URL_RES_LEAVE_GUARDIAN = "m";
     public static final String URL_RES_LEAVE_CHALLENGER = "n";
-    public static final String URL_REG_TURN = "o"; // == URL_RES_TURN
+    public static final String URL_REQ_TURN = "o"; // == URL_RES_TURN
     public static final String URL_RES_TURN = "o"; // == URL_REQ_TURN
     public static final String URL_REG_RESULT = "p";
     public static final String URL_REG_CHAT = "q"; // == URL_RES_CHAT
@@ -54,7 +55,7 @@ public class Define {
     public static final int SIZE_ROOM_ID = 36; // 36 ( 2byte * 36 )
     public static final int SIZE_ROOM_WINS = 2; // 2글자 ( 2byte * 2 ) => int
     public static final int SIZE_ROOM_STATUS = 1; // 1글자 ( 2byte * 1 )
-    public static final int SIZE_XY = 1; // 1글자 ( 2byte * 1 ) => 앞에 1byte X // 뒤에 1byte Y
+    public static final int SIZE_XY = 2; // 2글자 ( 2byte * 2 )
     public static final int SIZE_ROOM = SIZE_ROOM_ID + SIZE_ROOM_TITLE + SIZE_ROOM_WINS + SIZE_USER_NAME + SIZE_ROOM_STATUS;
     public static final int SIZE_ROOMS = SIZE_ROOM * 50;
 
@@ -73,7 +74,7 @@ public class Define {
             = null; // |header|
     public static final int[] URL_REQ_LEAVE_PROTOCOL
             = null; // |header|
-    public static final int[] URL_REG_TURN_PROTOCOL
+    public static final int[] URL_REQ_TURN_PROTOCOL
             = new int[] {SIZE_METHOD, SIZE_XY}; // |header(2)|xy(2)|
     public static final int[] URL_REG_RESULT_PROTOCOL
             = null; // |header|

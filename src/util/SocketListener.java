@@ -47,4 +47,10 @@ public class SocketListener {
         }
         ViewAdapter.getInstance().resultGame(true); // 승리
     }
+
+    /* listenTurn */
+    public static void listenTurn(String response) {
+        List<String> bodys = Common.cutBody(response, Define.URL_REQ_TURN_PROTOCOL);
+        ViewAdapter.getInstance().updateGame(bodys.get(1));
+    }
 }
