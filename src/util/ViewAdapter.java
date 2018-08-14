@@ -5,6 +5,7 @@ import controller.ControllerGame;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
 import model.Room;
+import model.User;
 
 import java.util.Iterator;
 import java.util.List;
@@ -48,11 +49,18 @@ public class ViewAdapter {
         }
     }
 
+    /* entryGame */
+    public void setGameHeader(String header) {
+        Platform.runLater(() -> {
+            this.controllerGame.lbDisplay.setText(header);
+        });
+    }
+
     /* toggleBtnReady */
     public void toggleBtnReady() {
         Platform.runLater(() -> {
             // UI 변경코드
-            PopupManager.getInstance().showTooptip("모든플레이어 준비완료");
+            setGameHeader("모든 플레이어 준비완료");
             this.controllerGame.btnGameStart.setDisable(!this.controllerGame.btnGameStart.isDisabled());
         });
     }
@@ -60,26 +68,38 @@ public class ViewAdapter {
     /* startGame */
     public void startGame() {
         Platform.runLater(() -> {
-            // UI 변경코드
-            SceneManager.getInstance().share.user.setPlay(true);
+            User user = SceneManager.getInstance().share.user;
+            // == 상태변경 ==
+            user.setPlay(true);
+
+            // == 팝업 ==
             PopupManager.getInstance().showTooptip("게임시작!");
+
+            // == 버튼변경 ==
             this.controllerGame.btnGameStart.setDisable(true);
             this.controllerGame.btnGameStart.setText("게임중");
+
+            // == 시작코드 ==
+            if(user.isTeam())
+                setGameHeader("상대 차례");
+            else
+                setGameHeader("내 차례");
         });
     }
 
     /* initGame */
     public void resultGame(boolean victory) {
         Platform.runLater(() -> {
-            // UI 변경코드
+            // == 초기화 ==
             this.controllerGame.result(victory);
+            setGameHeader("게임 대기중");
         });
     }
 
     /* updateGame */
     public void updateGame(String position) {
         Platform.runLater(() -> {
-            // == UI 변경 ==
+            // == 스톤처리 ==
             this.controllerGame.board.setStoneByChallenger(
                     Integer.parseInt(position.substring(0,1)),
                     Integer.parseInt(position.substring(1,2))
@@ -87,6 +107,13 @@ public class ViewAdapter {
 
             // == 차례변경 ==
             this.controllerGame.board.myTurn = true;
+            ViewAdapter.getInstance().setGameHeader("내 차례");
         });
+    }
+
+    /* updateStone */
+    public void updateStone(int black, int white) {
+        this.controllerGame.lbBlack.setText(black + "");
+        this.controllerGame.lbWhite.setText(white + "");
     }
 }

@@ -24,11 +24,11 @@ public class ControllerGame implements Initializable {
 
     /* FXML */
     @FXML BorderPane game;
-    @FXML Label lbDisplay;
+    public @FXML Label lbDisplay;
     public @FXML Button btnGameStart;
     @FXML Button btnGameEnd;
-    @FXML Label lbBlack;
-    @FXML Label lbWhite;
+    public @FXML Label lbBlack;
+    public @FXML Label lbWhite;
     @FXML GridPane playGround;
 
     /* Filed */
@@ -95,9 +95,7 @@ public class ControllerGame implements Initializable {
     private void handlerBtnGameStart(ActionEvent ae) {
         btnGameStart.setDisable(true);
         share.socket.send(Define.URL_REQ_READY);
-
-        if(share.user.isTeam() == Define.CHALLENGER)
-            PopupManager.getInstance().showTooptip("준비완료");
+        if(share.user.isTeam() == Define.CHALLENGER) lbDisplay.setText("준비완료");
     }
 
     /* 게임종료 */

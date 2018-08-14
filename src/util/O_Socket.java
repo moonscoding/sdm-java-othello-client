@@ -26,6 +26,7 @@ public class O_Socket extends MySocket {
             // == 입장정보 ==
             case Define.URL_RES_ENTRY:
                 // TODO 채팅창에설명
+                SocketListener.listenEntry(response);
                 break;
 
             // == 입장허가정보 ==

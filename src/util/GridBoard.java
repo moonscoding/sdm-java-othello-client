@@ -65,6 +65,7 @@ public class GridBoard {
                                     consumer.accept(postColumn + "" + postRow);
                                     // == 차례종료 ==
                                     myTurn = false;
+                                    ViewAdapter.getInstance().setGameHeader("상대 차례");
                                 }
                             }
                         }
@@ -110,6 +111,7 @@ public class GridBoard {
         else            countBlack++;
         updateReverse(isWhite);
 
+        ViewAdapter.getInstance().updateStone(countBlack, countWithe);
     }
 
     /* setStoneColorByPosition */
@@ -119,6 +121,8 @@ public class GridBoard {
         else         countWithe++;
         checkLocation(x, y, !isWhite);
         updateReverse(!isWhite);
+
+        ViewAdapter.getInstance().updateStone(countBlack, countWithe);
     }
 
     /* checkLocation */

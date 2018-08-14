@@ -26,6 +26,12 @@ public class SocketListener {
         ViewAdapter.getInstance().updateTable(listRooms);
     }
 
+    /* listenEntry */
+    public static void listenEntry(String response) {
+        List<String> bodys = Common.cutBody(response, Define.URL_RES_ENTRY_PROTOCOL);
+        ViewAdapter.getInstance().setGameHeader(bodys.get(1) + " 입장");
+    }
+
     /* listenReadyAccept */
     public static void listenReadyAccept() {
         ViewAdapter.getInstance().toggleBtnReady();
