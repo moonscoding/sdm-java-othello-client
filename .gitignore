@@ -1,5 +1,7 @@
 ### git ignore ###
 
+*.log
+
 ### IntelliJ ###
 .idea/
 *.iml

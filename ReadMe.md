@@ -52,6 +52,7 @@
 
 - Exceprtion 처리
 - Junit
+- 채팅기능
 
 #### JavaFX
 

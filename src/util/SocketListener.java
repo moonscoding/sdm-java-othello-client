@@ -14,13 +14,13 @@ public class SocketListener {
     public static void listenUpdateRoom(String response) {
         List<Room> listRooms = new LinkedList<>();
         for (int i = 1; i < response.length(); i+= Define.SIZE_ROOM) {
-            List<String> bodys = Common.cutBody(response.substring(i, Define.SIZE_ROOM+1), Define.URL_RES_SINGLE_ROOM_PROTOCOL);
+            List<String> bodys = Common.cutBody(response.substring(i, Define.SIZE_ROOM+i), Define.URL_RES_SINGLE_ROOM_PROTOCOL);
             listRooms.add(new Room(
                 bodys.get(0), // id
                 bodys.get(1), // title
                 bodys.get(2), // wins
                 bodys.get(3), // username
-                bodys.get(4) == "1" ? false : true // status
+                bodys.get(4).equals("1") ? false : true // status
             ));
         }
         ViewAdapter.getInstance().updateTable(listRooms);

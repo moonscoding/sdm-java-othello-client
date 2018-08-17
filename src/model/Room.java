@@ -25,7 +25,8 @@ public class Room {
         this.wins = new SimpleStringProperty(wins);
         this.title = new SimpleStringProperty(title);
         this.user = new SimpleStringProperty(user);
-        if(status != Define.ROOM_STATUS_A) {
+        System.out.println(status);
+        if(status == Define.ROOM_STATUS_A) {
             this.status = new SimpleStringProperty(Define.ROOM_STRING_A);
             this.count = new SimpleStringProperty("1");
         } else {

@@ -1,9 +1,7 @@
 package util;
 
-import common.Define;
 import controller.ControllerGame;
 import javafx.application.Platform;
-import javafx.scene.control.Button;
 import model.Room;
 import model.User;
 
